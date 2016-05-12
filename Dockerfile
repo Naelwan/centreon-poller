@@ -11,7 +11,7 @@ RUN yum install -y wget
 RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/yum.repos.d/ces-standard.repo
 
 # Install Packages (SSH, sudo, Centreon Poller & Engine)
-RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo
+RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils
 
 
 #Change centreon user password
