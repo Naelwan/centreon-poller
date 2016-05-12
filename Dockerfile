@@ -18,4 +18,7 @@ RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-c
 RUN echo -e "password" | (passwd --stdin centreon)
 
 #Start Services
-CMD ["service centengine start", "service sshd start", "service snmpd start"]
+CMD service centengine start && service sshd start && service snmpd start
+
+#Start bash
+CMD ["/bin/bash"]
