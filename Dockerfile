@@ -11,14 +11,11 @@ RUN yum install -y wget
 RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/yum.repos.d/ces-standard.repo
 
 # Install Packages (SSH, sudo, Centreon Poller & Engine)
-RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo supervisor
-
-
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo
 
 
 #Change centreon user password
 RUN echo -e "password" | (passwd --stdin centreon)
 
-EXPOSE 22 5669
-CMD ["/usr/bin/supervisord"]
+#Start Services
+CMD ["service centengine start", "service sshd start", "service snmpd start"]
