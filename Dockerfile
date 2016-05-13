@@ -19,8 +19,6 @@ RUN yum --enablerepo=epel install -y supervisor
 RUN mv -f /etc/supervisord.conf /etc/supervisord.conf.org
 ADD supervisord.conf /etc/
 
-# For sshd & centengine
-EXPOSE 22 5669
 
 # Change centreon user password
 RUN echo -e "password" | (passwd --stdin centreon)
