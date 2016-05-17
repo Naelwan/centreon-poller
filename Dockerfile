@@ -13,11 +13,6 @@ RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/y
 # Install Packages (SSH, sudo, Centreon Poller & Engine, SNMP)
 RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils
 
-# Install supervisord
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN yum --enablerepo=epel install -y supervisor
-RUN mv -f /etc/supervisord.conf /etc/supervisord.conf.org
-ADD supervisord.conf /etc/
 
 ADD services.sh /etc/
 RUN chmod +x /etc/services.sh
@@ -30,5 +25,5 @@ RUN echo -e "password" | (passwd --stdin centreon)
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 
-# Start supervisord
+# Start services
 CMD ["/etc/services.sh"]
