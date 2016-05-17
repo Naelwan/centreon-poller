@@ -19,6 +19,8 @@ RUN yum --enablerepo=epel install -y supervisor
 RUN mv -f /etc/supervisord.conf /etc/supervisord.conf.org
 ADD supervisord.conf /etc/
 
+ADD services.sh /etc/
+
 
 # Change centreon user password
 RUN echo -e "password" | (passwd --stdin centreon)
@@ -28,4 +30,4 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 
 # Start supervisord
-CMD ["/usr/bin/supervisord"]
+CMD ["/etc/services.sh"]
