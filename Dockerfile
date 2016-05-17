@@ -20,6 +20,7 @@ RUN mv -f /etc/supervisord.conf /etc/supervisord.conf.org
 ADD supervisord.conf /etc/
 
 ADD services.sh /etc/
+RUN chmod +x /etc/services.sh
 
 
 # Change centreon user password
