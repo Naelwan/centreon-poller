@@ -20,6 +20,8 @@ RUN chmod +x /etc/services.sh
 
 # Change centreon user password
 RUN echo -e "password" | (passwd --stdin centreon)
+RUN echo -e "password" | (passwd --stdin root)
+
 
 # Disable PAM (causing issues while ssh login)
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
