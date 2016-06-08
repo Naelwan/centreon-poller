@@ -1,0 +1,14 @@
+#!/bin/bash
+# ./check_temp_snmp_fortigate <community> <IP> <warn> <crit>
+
+var=`snmpget -v2c -c $1 $2  -O vq`
+echo " Temperature : $var°C"
+
+if [ $var -ge $3 ]		# Warning
+	then
+	if [ $var -ge $4 ]	# Critical
+		then
+		exit 2
+	fi
+	exit 1
+fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+# ./check_cpu_snmp_fortigate <community> <IP> <warn> <crit>
+
+var=`snmpget -v2c -c $1 $2 1.3.6.1.4.1.12356.101.4.1.3.0 -O vq`
+echo " CPU Load : $var %"
+
+if [ $var -ge $3 ]	# Warning
+	then
+	if [ $var -ge $4 ] 	# Crtitical
+		then
+		exit 2
+	fi
+	exit 1
+fi

@@ -1,0 +1,21 @@
+#!/bin/bash
+# ./check_uptime_snmp <community> <IP> <crit>
+
+var=`snmpget -v2c -c $1 $2 .1.3.6.1.4.1.2636.3.1.13.1.13.9.1.0.0 -O vq`
+
+D=`expr $var / 8640000`			#
+H=`bc <<< "scale=4; $var/8640000"`	#
+H=`echo $H | sed 's/.*\./0./'`		# Conversion
+H=`bc <<< "$H * 24"`			# Numerique
+M=`echo $H | sed 's/.*\./0./'`		# Vers
+M=`bc <<< "$M * 60 "`			# Alphanumérique
+H=`echo $H | sed 's/\..*//'`		#
+M=`echo $M | sed 's/\..*//'`		#
+
+
+echo " Uptime : $D days $H hours $M minutes"
+
+if [ $D -eq 0 ] && [ $H -eq 0 ] && [ $M -le 10 ]	# Warning
+	then
+	exit 2
+fi
