@@ -17,6 +17,9 @@ RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-c
 ADD services.sh /etc/
 RUN chmod +x /etc/services.sh
 
+ADD plugins/* /usr/lib/nagios/plugins/
+RUN chmod 755 /usr/lib/nagios/plugins/check_*_snmp_*
+
 
 # Change centreon user password
 RUN echo "centreon:password" | chpasswd
