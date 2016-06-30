@@ -13,6 +13,10 @@ RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/y
 # Install Packages (SSH, sudo, Centreon Poller & Engine, SNMP)
 RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils
 
+# Set Timezone
+RUN rm -f /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
 
 ADD services.sh /etc/
 RUN chmod +x /etc/services.sh
