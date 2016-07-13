@@ -10,10 +10,10 @@ RUN yum install -y wget ; yum clean all
 # Get Centreon Repo
 RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/yum.repos.d/ces-standard.repo
 
-RUN yum clean all
 
 # Install Packages (SSH, sudo, Centreon Poller & Engine, SNMP)
-RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils
+RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils ; yum clean all
+
 
 # Set Timezone
 RUN rm -f /etc/localtime
