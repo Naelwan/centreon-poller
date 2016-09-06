@@ -28,8 +28,8 @@ RUN chmod 755 /usr/lib/nagios/plugins/check_*_snmp_*
 
 
 # Change centreon user password
-RUN echo "centreon:password" | chpasswd
-RUN echo "root:password" | chpasswd
+RUN echo "centreon:Password1*" | chpasswd
+RUN echo "root:Password1*" | chpasswd
 
 
 # Disable PAM (causing issues while ssh login)
