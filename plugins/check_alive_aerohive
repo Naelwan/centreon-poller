@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# usage : ./check_alive_aerohive <AP List file>
+# File required : List of all AP's IPs
+
+nmap=`nmap -T5 -sP -iL $1 -v | grep down`
+
+IPDOWN=`echo $nmap | sed 's/Nmap scan report for //g'`
+
+IPDOWN=`echo $IPDOWN | sed 's/\[host down\]//g'`
+
+if [ -z "$IPDOWN" ]; then
+	echo "Bornes OK"	
+else
+	echo "Bornes DOWN : $IPDOWN "
+fi
