@@ -13,4 +13,5 @@ if [ -z "$IPDOWN" ]; then
 	echo "Bornes OK"	
 else
 	echo "Bornes DOWN : $IPDOWN "
+	exit 2;
 fi
