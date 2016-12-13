@@ -7,12 +7,13 @@ RUN yum -y update ; yum clean all
 # Install wget
 RUN yum install -y wget ; yum clean all
 
-# Get Centreon Repo
+# Get Centreon & EPEL Repos
 RUN wget http://yum.centreon.com/standard/3.0/stable/ces-standard.repo -O /etc/yum.repos.d/ces-standard.repo
-
+RUN wget http://epel.mirror.net.in/epel/6/i386/epel-release-6-8.noarch.rpm
+RUN rpm -ivh epel-release-6-8.noarch.rpm
 
 # Install Packages (SSH, sudo, Centreon Poller & Engine, SNMP)
-RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils ; yum clean all
+RUN yum install -y --nogpgcheck openssh-clients openssh-server sshpass centreon-poller-centreon-engine sudo net-snmp net-snmp-utils ; yum clean all
 
 
 # Set Timezone
