@@ -13,8 +13,8 @@ RUN wget http://epel.mirror.net.in/epel/6/i386/epel-release-6-8.noarch.rpm
 RUN rpm -ivh epel-release-6-8.noarch.rpm
 
 # Install Packages (SSH, sudo, Centreon Poller & Engine, SNMP)
-RUN yum install -y --nogpgcheck openssh-clients openssh-server sshpass centreon-poller-centreon-engine sudo net-snmp net-snmp-utils ; yum clean all
-
+RUN yum install -y --nogpgcheck openssh-clients openssh-server centreon-poller-centreon-engine sudo net-snmp net-snmp-utils ; yum clean all
+RUN yum install -y sshpass
 
 # Set Timezone
 RUN rm -f /etc/localtime
