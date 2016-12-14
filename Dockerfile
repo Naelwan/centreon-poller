@@ -26,6 +26,7 @@ RUN chmod +x /etc/services.sh
 
 ADD plugins/* /usr/lib/nagios/plugins/
 RUN chmod 755 /usr/lib/nagios/plugins/check_*_snmp_*
+RUN cp /usr/lib64/nagios/plugins/utils.pm /usr/lib/nagios/plugins/
 
 
 # Change centreon user password
